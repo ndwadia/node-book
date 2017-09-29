@@ -3,13 +3,13 @@ var wordSchema = require('./word_schema.js').wordSchema;
 var uri = "mongodb://admin:admin@cluster0-shard-00-00-5mlyc.mongodb.net:27017,cluster0-shard-00-01-5mlyc.mongodb.net:27017,cluster0-shard-00-02-5mlyc.mongodb.net:27017/words?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
 
 mongoose.connect(uri, {
-  useMongoClient: true,
+  useMongoClient: true
 });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
+db.once('open', function () {
   console.log('Connected');
-  var Words = mongoose.model('Words', wordSchema);
+  var Words = db.model('Words', wordSchema);
   Words.schema.pre('init', function (next) {
     console.log('a new word is about to be initialized from the db');
     next();
@@ -55,7 +55,8 @@ db.once('open', function() {
     }, function (err, doc) {
       if (err) return console.error(err);
       console.log("\nRemoving: ");
-      newWord.remove(function (err) {
+      // mongoose.disconnect();
+      doc.remove(function (err) {
         if (err) return console.error(err);
         mongoose.disconnect();
       });
