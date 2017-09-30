@@ -22,7 +22,7 @@ app.get(/^\/book\/(\w+)\:(\w+)?$/, function(req, res){
   res.send(response);
 });
 app.get('/user/:userid', function (req, res) {
-  var response = 'Get User: ' + req.param('userid');
+  var response = 'Get User: ' + req.params.userid;
   console.log('\nParam URL: ' + req.originalUrl);
   console.log(response);
   res.send(response);
