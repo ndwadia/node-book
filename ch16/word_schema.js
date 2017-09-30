@@ -13,6 +13,36 @@ var wordSchema = new Schema({
 wordSchema.methods.startsWith = function(letter){
   return this.first === letter;
 };
+wordSchema.pre('init', function (next) {
+  console.log('Doc newword is about to be initialized from the db');
+  next();
+});
+wordSchema.pre('validate', function (next) {
+  console.log('%s is about to be validated', this.word);
+  next();
+});
+wordSchema.pre('save', function (next) {
+  console.log('%s is about to be saved', this.word);
+  console.log('Setting size to %d', this.word.length);
+  this.size = this.word.length;
+  next();
+});
+wordSchema.pre('remove', function (next) {
+  console.log('%s is about to be removed', this.word);
+  next();
+});
+wordSchema.post('init', function (doc) {
+  console.log('%s has been initialized from the db', doc.word);
+});
+wordSchema.post('validate', function (doc) {
+  console.log('%s has been validated', doc.word);
+});
+wordSchema.post('save', function (doc) {
+  console.log('%s has been saved', doc.word);
+});
+wordSchema.post('remove', function (doc) {
+  console.log('%s has been removed', doc.word);
+});
 exports.wordSchema = wordSchema;
 //console.log("Required Paths: ");
 //console.log(wordSchema.requiredPaths());
