@@ -15,7 +15,7 @@ app.get('/user/:userid', function (req, res) {
   console.log("UTF8:\t   " + req.acceptsCharsets('utf8'));
   console.log("Connection: " + req.get('connection'));
   console.log("Headers: " + JSON.stringify(req.headers,null,2));
-  res.send("User Request");
+  res.send("User Request with userid: " + req.params.userid + "; username: " + req.query.name);
 });
 
 // localhost/user/4983?name=Brad
