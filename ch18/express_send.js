@@ -4,7 +4,7 @@ var app = express();
 app.listen(80);
 app.get('/', function (req, res) {
   var response = '<html><head><title>Simple Send</title></head>' +
-                 '<body><h1>Hello from Express</h1></body></html>';
+                 '<body><h2>Hello from Express to you</h2></body></html>';
   res.status(200);
   res.set({
     'Content-Type': 'text/html',
@@ -13,7 +13,7 @@ app.get('/', function (req, res) {
   res.send(response);
   console.log('Response Finished? ' + res.finished);
   console.log('\nHeaders Sent: ');
-  console.log(res.headerSent);
+  console.log("res._headers >>>>>>>" + JSON.stringify(res._headers));
 });
 app.get('/error', function (req, res) {
   res.status(400);
