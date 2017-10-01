@@ -2,7 +2,7 @@ var express = require('express'),
     jade = require('jade'),
     ejs = require('ejs');
 var app = express();
-app.set('views', './views');
+app.set('views', './ch18/views');
 app.set('view engine', 'jade');
 app.engine('jade', jade.__express);
 app.engine('html', ejs.renderFile);
