@@ -21,15 +21,31 @@ var options = {
   name: 'server-session-cookie-id'
 };
 app.use(session(options));
+app.get('/home', function (req, res) {
+  if (req.session.user) {
+    res.send('<h2>' + req.session.success + '</h2>' +
+      '<p>You have entered the home section<p><br>' +
+      ' <a href="/restricted">restricted</a>' +
+      ' <a href="/logout">logout</a>');
+  } else {
+    res.send('<p>Please log in: <p><br>' +
+      ' <a href="/login">login</a>');
+  }
+});
 app.get('/restricted', function (req, res) {
   if (req.session.user) {
     res.send('<h2>' + req.session.success + '</h2>' +
       '<p>You have entered the restricted section<p><br>' +
       ' <a href="/logout">logout</a>');
   } else {
-    req.session.error = 'Access denied!';
-    res.redirect('/login');
+    req.session.error = 'Access Denied!';
+    res.redirect('/accessDenied');
   }
+});
+app.get('/accessDenied', function (req, res) {
+  res.send('<h2> Access Denied </h2>' +
+    '<p>Please log in: <p><br>' +
+    ' <a href="/login">login</a>');
 });
 app.get('/logout', function (req, res) {
   req.session.destroy(function () {
@@ -43,9 +59,9 @@ app.get('/login', function (req, res) {
     'Password: <input type="password" name="password"><br>' +
     '<input type="submit" value="Submit"></form>';
   if (req.session.user) {
-    res.redirect('/restricted');
-  } else if (req.session.error) {
-    response += '<h2>' + req.session.error + '<h2>';
+    res.redirect('/home');
+  } else if (req.session.error === 'Authentication failed') {
+    response = '<h2> Authentication failed: Please try again </h2>' + response;
   }
   res.type('html');
   res.send(response);
@@ -60,14 +76,13 @@ app.post('/login', function (req, res) {
     req.session.regenerate(function () {
       req.session.user = user;
       req.session.success = 'Authenticated as ' + user.name;
-      res.redirect('/restricted');
+      res.redirect('/home');
     });
   } else {
     req.session.regenerate(function () {
-      req.session.error = 'Authentication failed.';
-      res.redirect('/restricted');
+      req.session.error = 'Authentication failed';
+      res.redirect('/login');
     });
-    // res.redirect('/login');
   }
 });
 app.listen(80);
