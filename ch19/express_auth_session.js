@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var FileStore = require('session-file-store')(session);
 var crypto = require('crypto');
 function hashPW(pwd){
   return crypto.createHash('sha256').update(pwd).
@@ -10,8 +10,14 @@ function hashPW(pwd){
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cookieParser('MAGICString'));
-app.use(session());
+var options = {
+  store: new FileStore(),
+  secret: 'keyboard-cat',
+  resave: true,
+  saveUninitialized: true,
+  name: 'server-session-cookie-id'
+};
+app.use(session(options));
 app.get('/restricted', function(req, res){
   if (req.session.user) {
     res.send('<h2>'+ req.session.success + '</h2>' +
@@ -24,6 +30,7 @@ app.get('/restricted', function(req, res){
 });
 app.get('/logout', function(req, res){
   req.session.destroy(function(){
+    res.clearCookie(options.name);
     res.redirect('/login');
   });
 });
@@ -52,7 +59,7 @@ app.post('/login', function(req, res){
   } else {
     req.session.regenerate(function(){
       req.session.error = 'Authentication failed.';
-      res.redirect('/restricted');
+      // res.redirect('/restricted');
     });
     res.redirect('/login');
   }
