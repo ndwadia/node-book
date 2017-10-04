@@ -6,7 +6,7 @@
 </head>
 <body>
   <div ng-controller="myController">
-    <input type="text" ng-click="keystroke($event)" />
+    <input type="text" ng-keyup="keyStroke($event)" />
   </div>
   <div ng-controller="myController2">Last 5 chars: {{chars}}</div>
   <script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
