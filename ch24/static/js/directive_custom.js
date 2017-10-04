@@ -25,8 +25,8 @@ angular.module('myApp', [])
       restrict: 'E',
       transclude: true,
       scope: { title: '@'},
-      link: function(scope, elem, attrs, photosControl) {
-        photosControl.addPhoto(scope);
+      link: function(scope, elem, attrs, myPhotosControl) {
+        myPhotosControl.addPhoto(scope);
       },
       template: '<div ng-show="selected" ng-transclude></div>'
     };
