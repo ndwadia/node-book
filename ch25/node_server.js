@@ -19,10 +19,10 @@ app.get('/reset/days', function (req, res) {
 app.post('/remove/day', function (req, res) {
   if (serviceDays.length > 2) {
     serviceDays.splice(serviceDays.indexOf(req.body.day), 1);
-    console.log(days);
-    res.json(serviceDays);
+    console.log(serviceDays);
+    res.status(200).json(serviceDays);
   } else {
-    res.json(400, {
+    res.status(400).json({
       msg: 'You must leave 2 days'
     });
   }
