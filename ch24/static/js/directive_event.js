@@ -1,5 +1,7 @@
 angular.module('myApp', []).
   controller('myController', function($scope) {
+    $scope.focusState = '';
+    $scope.mouseState = '';
     $scope.keyInfo = {};
     $scope.mouseInfo = {};
     $scope.keyStroke = function(event){
