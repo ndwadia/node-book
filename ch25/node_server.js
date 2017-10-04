@@ -1,9 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-app.use('/', express.static('./static')).
-    use('/images', express.static( '../images')).
-    use('/lib', express.static( '../lib'));
+app.use('/', express.static('./ch25/static')).
+    use('/images', express.static( './images')).
+    use('/lib', express.static( './lib'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 var days=['Monday', 'Tuesday', 'Wednesday',
