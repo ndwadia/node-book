@@ -16,7 +16,7 @@ app.factory('censorF', ['censorWords', 'repString',
 function CensorObj(cWords, repString) {
   this.censor = function (inString) {
     var outString = inString;
-    for (i in cWords) {
+    for (var i in cWords) {
       outString = outString.replace(cWords[i], repString);
     }
     return outString;
