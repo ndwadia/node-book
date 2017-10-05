@@ -26,6 +26,6 @@ app.service('censorS', ['censorWords', 'repString', CensorObj]);
 app.controller('myController', ['$scope', 'censorF', 'censorS',
   function ($scope, censorF, censorS) {
     $scope.censoredByFactory = censorF("sad, mad text");
-    $scope.censoredByService = censorS.censor("bad text is very sad");
+    $scope.censoredByService = censorS.censor("bad text makes me very mad");
   }
 ]);
