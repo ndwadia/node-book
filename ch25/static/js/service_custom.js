@@ -5,7 +5,7 @@ app.factory('censorF', ['censorWords', 'repString',
   function (cWords, repString) {
     return function (inString) {
       var outString = inString;
-      for (i in cWords) {
+      for (var i in cWords) {
         outString = outString.replace(cWords[i], repString);
       }
       return outString;
