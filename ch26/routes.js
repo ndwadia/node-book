@@ -43,6 +43,7 @@ module.exports = function (app) {
   });
   app.get('/logout', function (req, res) {
     req.session.destroy(function () {
+      res.clearCookie('server-session-cookie-id');
       res.redirect('/login');
     });
   });
@@ -51,4 +52,4 @@ module.exports = function (app) {
   app.post('/user/delete', users.deleteUser);
   app.post('/login', users.login);
   app.get('/user/profile', users.getUserProfile);
-}
+};
