@@ -47,6 +47,12 @@ module.exports = function (app) {
       res.redirect('/login');
     });
   });
+  app.get('/goodbye', function (req, res) {
+    if (req.session.user) {
+      res.redirect('/');
+    }
+    res.send('User has been deleted');
+  });
   app.post('/signup', users.signup);
   app.post('/user/update', users.updateUser);
   app.post('/user/delete', users.deleteUser);

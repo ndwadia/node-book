@@ -17,10 +17,7 @@ exports.signup = function (req, res) {
       res.session.error = err;
       res.redirect('/signup');
     } else {
-      req.session.user = user.id;
-      req.session.username = user.username;
-      req.session.msg = 'Authenticated as ' + user.username;
-      res.redirect('/');
+      res.redirect('/login');
     }
   });
 };
@@ -92,7 +89,7 @@ exports.deleteUser = function (req, res) {
             req.session.msg = err;
           }
           req.session.destroy(function () {
-            res.redirect('/login');
+            res.redirect('/goodbye');
           });
         });
       } else {
