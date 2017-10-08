@@ -4,9 +4,9 @@ exports.getPage = function(req, res) {
   Page.findOne({ name: req.query.pageName })
   .exec(function(err, page) {
     if (!page){
-      res.json(404, {msg: 'Page Not Found.'});
+      res.status(404).json({msg: 'Page Not Found.'});
     } else {
-      res.json(page);
+      res.status(200).json(page);
     }
   });
 };
