@@ -16,9 +16,7 @@ ReplySchema.add({
 });
 
 var CommentThreadSchema = new Schema({
-  title: String
-});
-CommentThreadSchema.add({
+  title: String,
   replies: [ReplySchema]
 });
 
