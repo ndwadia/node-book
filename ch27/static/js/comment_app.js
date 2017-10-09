@@ -37,7 +37,7 @@ app.controller('photoController', ['$scope', '$http', 'commentSrv',
       commentSrv.getComment($scope.photo.commentId, 
                             function(err, comment){
         if(err){
-          $srope.commentThread = {};
+          $scope.commentThread = {};
         } else {
           $scope.commentThread = comment;
         }
