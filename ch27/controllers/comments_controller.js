@@ -78,5 +78,5 @@ function updateCommentThread(req, res, commentThread) {
 function generateRandomUsername() {
   //typically the username would come from an authenticated session
   var users = ['DaNae', 'Brad', 'Brendan', 'Caleb', 'Aedan', 'Taeg'];
-  return users[Math.floor((Math.random() * 5))];
+  return users[Math.floor((Math.random() * 6))];
 }
