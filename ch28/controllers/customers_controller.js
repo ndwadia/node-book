@@ -74,7 +74,7 @@ exports.updateCart = function (req, res) {
           msg: 'Failed to update Cart.'
         });
       } else {
-        res.ststus(200).json({
+        res.status(200).json({
           msg: "Customer Cart Updated"
         });
       }

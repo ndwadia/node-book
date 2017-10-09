@@ -32,8 +32,8 @@ exports.getOrders = function (req, res) {
     });
 };
 exports.addOrder = function (req, res) {
-  var orderShipping = new Address(req.body.updatedShipping);
-  var orderBilling = new Billing(req.body.updatedBilling);
+  var orderShipping = new Address(req.body.orderShipping);
+  var orderBilling = new Billing(req.body.orderBilling);
   var orderItems = req.body.orderItems;
   var newOrder = new Order({
     userid: 'customerA',
