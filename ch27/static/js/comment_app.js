@@ -84,7 +84,7 @@ app.controller('pageController', ['$scope', '$http','commentSrv',
        commentSrv.getComment($scope.page.commentId, 
                              function(err, comment){
          if(err){
-           $srcope.commentThread = {};
+           $scope.commentThread = {};
          } else {
            $scope.commentThread = comment;
          }
