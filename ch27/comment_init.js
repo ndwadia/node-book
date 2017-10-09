@@ -47,4 +47,4 @@ CommentThread.remove().exec(function () {
       addPhoto('Sunsets', 'jump.jpg');
     });
   });
-});;
+});
