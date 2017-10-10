@@ -41,4 +41,4 @@ exports.getWeather = function (req, res) {
   http.request(options, function (weatherResponse) {
     parseWeather(req, res, weatherResponse);
   }).end();
-}
+};
