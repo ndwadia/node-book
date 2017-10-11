@@ -37,6 +37,6 @@ function getSortField(req) {
     field = req.query.sort;
     field = field.toLowerCase();
   }
-  if (req.query.direction !== 'asc') field = '-' + field;
+  if (req.query.direction == 'desc') field = '-' + field;
   return field;
 }
